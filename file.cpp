@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <ctype.h>
 
 using namespace std; //to shorten cin and cout statements
 
@@ -19,20 +20,25 @@ int main()
   cout << "Enter something 80 characters long or shorter to see if it's a palindrome.";
   cin.get(input, 80);
   cin.get();
-  for (int i = 0; i < 80; i++)
+  for (int i = 0; i < strlen(input); i++)
     {
-      if (input[i] != ' ' && input[i] != '.' && input[i] != '!' && input[i] != '?' && input[i] != ',')
-	{
-	  newinput[count] = input[i];
-	}
+      if (input[i] == ' ' || input[i] == '.' || input[i] == '!' || input[i] == '?' || input[i] == ',')
+      	{	  
+      	  continue;
+     	}
+      newinput[count] = input[i];
+      newinput[count] = tolower(newinput[count]);
       count++;
     }
+  newinput[count] = '\0';
   count = 0;
-  for (int i = strlen(newinput) - 1; i > -1; i--)
+  for (int i = strlen(newinput) - 1; i >= 0; i--)
     {
       backwards[count] = newinput[i];
+      backwards[count] = tolower(backwards[count]);
       count++;
     }
+  backwards[count] = '\0';
   cout << newinput << endl;
   cout << backwards << endl;
   if (strcmp(newinput, backwards) == 0)
